@@ -1,24 +1,21 @@
-#include <QWidget>
-#include <QPainter>
-#include <QKeyEvent>
+#include <QGraphicsView>
+#include <QPointF>
+#include <QWheelEvent>
 #include <vector>
 
 #include "fractalLine.hpp"
 
-class Canvas : public QWidget {
+class Canvas : public QGraphicsView {
 	Q_OBJECT
 
 public:
-	explicit Canvas(QWidget *parent = nullptr);
-
-	QSize minimumSizeHint() const override;
-	QSize sizeHint() const override;
+	explicit Canvas(QGraphicsScene *parent = nullptr);
 
 protected:
-	void paintEvent(QPaintEvent *event) override;
-	void keyPressEvent(QKeyEvent *event) override;
-
+    void wheelEvent(QWheelEvent *e) override;
 private:
-	float deform, falloff;
+    QPointF _offset;
+    bool _isPanning;
+    QPoint _panPrev;
 	std::vector<FractalLine*> lines;
 };
