@@ -14,11 +14,15 @@ Features that may be in scope depending on how quickly core features can be impl
 
 ## Software Requirements
 
-1. Fractal line generation
-2. The ability to place fractal lines with the mouse and move them after being placed
-3. Saving and loading of created designs to file for future editing
-4. Zooming and panning the viewport around the image.
-5. Exporting the current canvas to image file types.
-6. Polygon tool for multi line fractals, or closed loop fractals
-7. Line color and polyline fill selection
+1. Fractal line generation.
+2. Ability to swap between straight line, fractal line, and pan/move tool.
+3. The ability to place fractal lines with the mouse and move them after being placed.
+4. Saving and loading of created designs to file for future editing.
+5. in-engine understanding of distances, and a map-key utility.
+6. Zooming and panning the viewport around the image.
+7. Exporting the current canvas to image file types.
+8. SVG importing for stamps.
+9. Polygon tool for multi line fractals, or closed loop fractals.
+10. Line color and polyline fill selection.
+
 
