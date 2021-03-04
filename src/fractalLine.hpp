@@ -1,21 +1,32 @@
-#include <QPointF>
-#include <QPolygonF>
-#include <random>
+#ifndef FRACTAL_LINE_H_
+#define FRACTAL_LINE_H_
 
-class FractalLine {
+#include <QPointF>
+#include <QRectF>
+#include <QGraphicsItem>
+#include <QPolygonF>
+#include <FastNoise/FastNoise.h>
+
+
+class FractalLine : public QGraphicsItem {
 
 public:
-	QPolygonF* toPolyLine();
-	QPolygonF* fractalize(const QPointF *a, const QPointF *b, int d);
-	FractalLine(QPointF*, QPointF*, int);
-	
-private:
-	QPointF *start;
-	QPointF *end;
-	int seed;
-	float deform;
-	float falloff;
-	int depth; // Max number of deform iterations
+	FractalLine(QPointF, QPointF);
+	QRectF boundingRect() const override;
+	void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
-	static std::minstd_rand rand;
+	float getLacunarity();
+	void setLacunarity(float);
+
+	void setStart(QPointF);
+	void setEnd(QPointF);
+	
+
+private:
+	FastNoise::SmartNode<FastNoise::Fractal<>> noise;
+	static const int SEGMENTS = 500;
+
+	QPointF start, end;
 };
+
+#endif // FRACTAL_LINE_H_
