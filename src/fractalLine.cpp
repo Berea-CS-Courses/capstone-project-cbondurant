@@ -1,41 +1,56 @@
+#include <QGraphicsItem>
+#include <QMessageLogger>
+#include <QRectF>
+#include <QPainter>
+#include <QStyleOptionGraphicsItem>
+#include <QWidget>
+#include <FastNoise/FastNoise.h>
 #include "fractalLine.hpp"
+#include "pointHelper.hpp"
 
-std::minstd_rand FractalLine::rand = std::minstd_rand();
+#include <vector>
 
-FractalLine::FractalLine(QPointF *st, QPointF *e, int d){
-	std::random_device s;
-	seed = s();
-    start = st;
-    end = e;
-    depth = d;
-    deform = 0.75;
+FractalLine::FractalLine(QPointF start, QPointF end) : start(start), end(end){
+	noise = FastNoise::New<FastNoise::FractalFBm>();
+	noise->SetSource(FastNoise::New<FastNoise::Simplex>());
+	noise->SetOctaveCount(5);
+	noise->SetLacunarity(0.3f);
+	noise->SetGain(0);
 }
 
-QPolygonF* FractalLine::fractalize(const QPointF *a, const QPointF *b, int d){
-	QPointF mid = (*a + *b)/2;
+QRectF FractalLine::boundingRect() const {
+	QMargins extent(10,10,10,10);
+	return QRectF(start, start).marginsAdded(extent)
+	.united(QRectF(end, end).marginsAdded(extent));
+}
 
-	QPointF offset = *b - mid;
+void FractalLine::setStart(QPointF s){
+	start = s;
+	prepareGeometryChange();
+	update();
+	return;
+}
 
-	float tmp = offset.x();
-	offset.setX(offset.y() * -1);
-	offset.setY(tmp);
-	int r = rand();
-    float deformRand = (float)(r - ((float)FractalLine::rand.max()/2))/ (float)FractalLine::rand.max();
-	mid += offset * deform * deformRand;
-	QPolygonF *line = new QPolygonF();
-	float dist = pow(offset.x(),2) + pow(offset.y(),2);
-	if (abs(sqrt(dist)*deform) > 1 and d != 0){
-		line->append(*this->fractalize(a,&mid,d-1));
-		line->append(*this->fractalize(&mid,b,d-1));
-	}else{
-        line->append(*a);
-        line->append(mid);
-        line->append(*b);
+void FractalLine::setEnd(QPointF e){
+	end = e;
+	prepareGeometryChange();
+	update();
+	return;
+}
+
+
+void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+	float curve[SEGMENTS] = {};
+	noise->GenUniformGrid2D(curve,0,0,SEGMENTS,1,0.2f,1337);
+	QPainterPath path;
+	path.moveTo(start);
+	QPointF perp = Lipuma::normalize((end - start).transposed());
+	perp.setX(-perp.x());
+	for (int i = 1; i < SEGMENTS; i++){
+		QPointF point = Lipuma::lerp(start, end, (float)i/SEGMENTS);
+		point += perp * curve[i]*5;
+		path.lineTo(point);
 	}
-	return line;
-}
-
-QPolygonF* FractalLine::toPolyLine(){
-	FractalLine::rand.seed(seed);
-	return this->fractalize(start, end, depth);
+	painter->drawPath(path);
+	// painter->drawRect(boundingRect());
 }
