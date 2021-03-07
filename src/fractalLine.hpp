@@ -7,26 +7,27 @@
 #include <QPolygonF>
 #include <FastNoise/FastNoise.h>
 
+namespace Lipuma {
+	class FractalLine : public QGraphicsItem {
 
-class FractalLine : public QGraphicsItem {
+	public:
+		FractalLine(QPointF, QPointF);
+		QRectF boundingRect() const override;
+		void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
-public:
-	FractalLine(QPointF, QPointF);
-	QRectF boundingRect() const override;
-	void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+		float getLacunarity();
+		void setLacunarity(float);
 
-	float getLacunarity();
-	void setLacunarity(float);
+		void setStart(QPointF);
+		void setEnd(QPointF);
+		
 
-	void setStart(QPointF);
-	void setEnd(QPointF);
-	
+	private:
+		FastNoise::SmartNode<FastNoise::Fractal<>> noise;
+		static const int SEGMENTS = 500;
 
-private:
-	FastNoise::SmartNode<FastNoise::Fractal<>> noise;
-	static const int SEGMENTS = 500;
-
-	QPointF start, end;
-};
+		QPointF start, end;
+	};
+}
 
 #endif // FRACTAL_LINE_H_

@@ -5,7 +5,7 @@
 int main (int argc, char **argv){
 	QApplication a(argc, argv);
     QGraphicsScene scene;
-	Canvas canvas(&scene);
+	Lipuma::Canvas canvas(&scene);
 	canvas.show();
 	return a.exec();
 }
