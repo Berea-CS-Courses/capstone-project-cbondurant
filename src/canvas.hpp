@@ -8,6 +8,10 @@
 
 #include "fractalLine.hpp"
 namespace Lipuma {
+	/*
+		Subclass of the QGraphics view.
+		Intends to override and improve panning behavior.
+	*/
 	class Canvas : public QGraphicsView {
 		Q_OBJECT
 
