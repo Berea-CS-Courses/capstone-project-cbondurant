@@ -8,6 +8,13 @@
 #include <FastNoise/FastNoise.h>
 
 namespace Lipuma {
+
+	/*
+		Fractally deformed line with configurable deformation settings.
+
+		Lacunarity: how much the frequency increases each iteration.
+		Gain: how much the amplitude of each iteration decreases.
+	*/
 	class FractalLine : public QGraphicsItem {
 
 	public:
