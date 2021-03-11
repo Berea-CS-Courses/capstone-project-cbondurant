@@ -7,5 +7,6 @@ int main (int argc, char **argv){
     QGraphicsScene scene;
 	Lipuma::Canvas canvas(&scene);
 	canvas.show();
+	Lipuma::Canvas::singleton = &canvas;
 	return a.exec();
 }

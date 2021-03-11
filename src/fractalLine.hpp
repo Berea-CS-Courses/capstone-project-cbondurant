@@ -28,12 +28,19 @@ namespace Lipuma {
 		void setStart(QPointF);
 		void setEnd(QPointF);
 		
+		float getFrequency();
+		void setFrequency(float);
 
 	private:
 		FastNoise::SmartNode<FastNoise::Fractal<>> noise;
-		static const int SEGMENTS = 500;
+		static const int SEGMENTS = 100;
+
+		// 
+		static const int PERIOD = 2;
 
 		QPointF start, end;
+
+		float frequency;
 	};
 }
 
