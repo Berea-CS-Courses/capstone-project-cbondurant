@@ -13,9 +13,10 @@ namespace Lipuma {
 	FractalLine::FractalLine(QPointF start, QPointF end) : start(start), end(end){
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
-		noise->SetOctaveCount(5);
-		noise->SetLacunarity(0.3f);
-		noise->SetGain(0);
+		frequency = 20;
+		noise->SetOctaveCount(50);
+		noise->SetLacunarity(2.0f);
+		noise->SetGain(.09);
 	}
 
 	QRectF FractalLine::boundingRect() const {
@@ -28,30 +29,40 @@ namespace Lipuma {
 		start = s;
 		prepareGeometryChange();
 		update();
-		return;
 	}
 
 	void FractalLine::setEnd(QPointF e){
 		end = e;
 		prepareGeometryChange();
 		update();
-		return;
 	}
 
+	float FractalLine::getFrequency(){
+		return frequency;
+	}
+
+	void FractalLine::setFrequency(float f){
+		frequency = f;
+		prepareGeometryChange();
+		update();
+	}
 
 	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-		float curve[SEGMENTS] = {};
-		noise->GenUniformGrid2D(curve,0,0,SEGMENTS,1,0.2f,1337);
+		const int POINTS = (distance(start-end) / PERIOD) + 8; 
+		float curve[POINTS] = {};
+		noise->GenUniformGrid2D(curve,0,0,POINTS,1,frequency,1337);
 		QPainterPath path;
 		path.moveTo(start);
+		if (distance(end-start) < 1){return;}
 		QPointF perp = Lipuma::normalize((end - start).transposed());
 		perp.setX(-perp.x());
-		for (int i = 1; i < SEGMENTS; i++){
-			QPointF point = Lipuma::lerp(start, end, (float)i/SEGMENTS);
-			point += perp * curve[i]*5;
+		for (int i = 1; i <= POINTS; i++){
+			QPointF point = Lipuma::lerp(start, end, (float)i/POINTS);
+			point += perp * curve[i-1]*50;
+			assert (abs(point.x()) < 100000);
 			path.lineTo(point);
 		}
 		painter->drawPath(path);
-		// painter->drawRect(boundingRect());
+		//painter->drawRect(boundingRect());
 	}
 }

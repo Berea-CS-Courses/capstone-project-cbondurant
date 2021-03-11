@@ -20,6 +20,10 @@ namespace Lipuma{
 		double d = sqrt(abs((pow(p.x(), 2) + pow(p.y(), 2))));
 		return p/d;
 	}
+
+	double distance(QPointF p){
+		return sqrt(abs((pow(p.x(), 2) + pow(p.y(), 2))));
+	}
 }
 
 #endif //POINT_HELPER_H
