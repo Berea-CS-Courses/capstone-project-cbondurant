@@ -52,16 +52,55 @@
 
 ## Canvas Object
 > Canvas objects are the individual lines that can be modified.
-- Select
-- Deselect
-- Move Selected
-- Configure Selected
-- Delete Selected
+### Select
+1. User clicks on the canvas with the select tool
+2. The select tool uses collision information and redraw information to identify what object or objects need to be selected
+3. A "Selected" event is passed o all of the objects and they are added to a list of selected objects
+4. Selected objects will use the selection event to update their draw state to reflect being selected.
+5. A "Selection Updated" event will trigger, annoucing that widgets that rely on selection information need to be redrawn
+
+### Deselect
+1. User clicks on the canvas with the select tool
+2. The select tool uses collision information and redraw information to identify what object or objects need to be selected or deselected
+3. A "Selected" event is passed o all of the objects and they are added to a list of selected objects
+4. Selected objects will use the selection event to update their draw state to reflect being selected.
+5. A "Selection Updated" event will trigger, annoucing that widgets that rely on selection information need to be redrawn
+
+### Move Selected
+1. The user selects the transform tool
+2. The transform tool paints to screen a transformation layout guide
+3. The transform tool applies transformations to all selected objects as it is manipulated
+
+### Configure Selected
+1. While objects are selected the object settings widget will show applicable configuration for the current objects.
+2. Any updates made here will apply to all selected objects
+3. The object settings widget should only show settings that apply to all currently selected objects.
+
+### Clipboard/Delete Selected
+1. While objects are selected the user may use any of the common keyboard clipboard shortcuts, (ctrl+C, V, X; Delete)
+2. This will cause an event that modifies the current selected objects
 
 ## Layer
-- Select 
-- Hide 
-- Reorder 
-- Create 
-- Delete 
-- Configure 
+
+### Select
+1. The user clicks on a layer bar and releases without dragging
+2. The layer control widget sets the current widget variable to the correct value
+
+### Hide
+1. The user clicks on an eye symbol associated with a particular layer
+2. This layer object is then set to be invisible, no longer drawing any of its associated objects
+
+### Reorder 
+1. The user clicks and drags a layer box.
+2. While dragging the layer box should be rendered under the mouse, with other layer objects shifting around
+3. On release, the the layer control widget redefines the draw order of layers.
+
+
+### Create 
+1. On the layer control widget, a plus button is clicked
+2. This creates a new empty layer adjacent to the currently selected layer, and automatically selects it
+
+### Delete 
+1. The user clicks on a trash button that is adjacent to the new layer button
+2. A small warning model appears, confirming that the user would like to delete the layer
+3. This layer is removed, and the memory of its contained objects are all cleared.
