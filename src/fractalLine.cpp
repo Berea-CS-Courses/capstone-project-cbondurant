@@ -58,7 +58,7 @@ namespace Lipuma {
 		perp.setX(-perp.x());
 		for (int i = 1; i <= POINTS; i++){
 			QPointF point = Lipuma::lerp(start, end, (float)i/POINTS);
-			point += perp * curve[i-1]*50;
+			point += perp * curve[i-1]*5;
 			assert (abs(point.x()) < 100000);
 			path.lineTo(point);
 		}
