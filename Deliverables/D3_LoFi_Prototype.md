@@ -6,6 +6,6 @@ I came to this (Still WIP) layout by studying the designs of other common art pr
 
 ![Balsemiq Layout](./img/Lipuma_Layout.png)
 
-## Object communication diagram
+## Program Verbs
 
-I plan on by next week also having a diagram that shows the communication paths between the core components and subcomponents of my system, as I know there are a large number of systems that need to interact. I have also realzied there are additional features that I will need to implement because they are not provided by my GUI framework. It is important to make sure that the communication of events is properly understood and well handled.
+I have detailed common verbs that I expect the user to perform and how they should be handled at [This File](./userVerbs.md)
