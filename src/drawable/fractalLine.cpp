@@ -1,3 +1,4 @@
+#include <QColor>
 #include <QGraphicsItem>
 #include <QMessageLogger>
 #include <QRectF>
@@ -11,6 +12,7 @@
 #include <vector>
 namespace Lipuma {
 	FractalLine::FractalLine(QPointF start, QPointF end) : start(start), end(end){
+        setFlag(QGraphicsItem::ItemIsSelectable);
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
 		frequency = 20;
@@ -48,6 +50,9 @@ namespace Lipuma {
 	}
 
 	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+        if (isSelected()){
+            painter->setPen(QColor(255,0,0));            
+        }
 		const int POINTS = (distance(start-end) / PERIOD) + 8; 
 		float curve[POINTS] = {};
 		noise->GenUniformGrid2D(curve,0,0,POINTS,1,frequency,1337);

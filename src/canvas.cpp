@@ -2,12 +2,14 @@
 #include <QPainter>
 #include <QGraphicsView>
 #include <QGraphicsItem>
+#include <QKeyEvent>
 #include <iostream>
 #include <cstdlib>
 #include <set>
 #include <cmath>
 #include "canvas.hpp"
 #include "tool/tool.hpp"
+#include "tool/toolManager.hpp"
 #include "tool/fractalTool.hpp"
 #include "drawable/drawable.hpp"
 
@@ -15,28 +17,13 @@ namespace Lipuma {
 	Canvas::Canvas(QGraphicsScene *parent) : QGraphicsView(parent){
 		setBackgroundRole(QPalette::Base);
 		setAutoFillBackground(true);
-		//setDragMode(QGraphicsView::ScrollHandDrag);
+		setDragMode(QGraphicsView::RubberBandDrag);
 		setResizeAnchor(QGraphicsView::AnchorUnderMouse);
-		_currentTool = new FractalTool();
+		_currentTool = ToolManager::getFractalTool();
 		setSceneRect(0, 0, 2000, 2000);
-        selected = new std::set<Drawable*>();
 	}
 
 	Canvas *Canvas::singleton = nullptr;
-
-    void Canvas::selectObject(Drawable* item){
-        item->selected = true;
-        selected->insert(item); 
-    }
-
-    void Canvas::deselectObject(Drawable* item){
-        item->selected = false;
-        selected->erase(item);
-    }
-
-    const std::set<Drawable*>& Canvas::getObjectIterator() const{
-        return *selected;
-    }
 
 	void Canvas::wheelEvent(QWheelEvent *e){
 		_currentTool->wheelEvent(e);
@@ -58,6 +45,22 @@ namespace Lipuma {
 		*/
 	}
 
+    void Canvas::keyPressEvent(QKeyEvent *e){
+        if (e->key() == Qt::Key_S && _currentTool != ToolManager::getSelectionTool()){
+            _currentTool->disableEvent();
+            _currentTool = ToolManager::getSelectionTool();
+            _currentTool->enableEvent(); 
+            e->accept();
+        }
+        if (e->key() == Qt::Key_F && _currentTool != ToolManager::getFractalTool()){
+            _currentTool->disableEvent();
+            _currentTool = ToolManager::getFractalTool();
+            _currentTool->enableEvent(); 
+            e->accept();
+        }
+        QGraphicsView::keyPressEvent(e);
+    }
+
 	void Canvas::setCurrentTool(Tool *tool) {
 		_currentTool->disableEvent();
 		_currentTool = tool;
@@ -70,17 +73,21 @@ namespace Lipuma {
 
 	void Canvas::mouseMoveEvent(QMouseEvent *e){
 		_currentTool->mouseMoveEvent(e);
+        if (!e->isAccepted()) QGraphicsView::mouseMoveEvent(e);
 	}
 
 	void Canvas::mousePressEvent(QMouseEvent *e){
 		_currentTool->mousePressEvent(e);
+        if (!e->isAccepted()) QGraphicsView::mousePressEvent(e);
 	}
 
 	void Canvas::mouseDoubleClickEvent(QMouseEvent *e){
 		_currentTool->mouseDoubleClickEvent(e);
+        if (!e->isAccepted()) QGraphicsView::mouseDoubleClickEvent(e);
 	}
 
 	void Canvas::mouseReleaseEvent(QMouseEvent *e){
 		_currentTool->mouseReleaseEvent(e);
+        if (!e->isAccepted()) QGraphicsView::mouseReleaseEvent(e);
 	}
 }

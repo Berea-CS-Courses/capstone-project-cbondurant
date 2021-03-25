@@ -7,9 +7,9 @@ namespace Lipuma {
 	Tool::Tool() {}
 	void Tool::enableEvent() {}
 	void Tool::disableEvent() {}
-	void Tool::mousePressEvent(QMouseEvent *e) {}
-	void Tool::mouseReleaseEvent(QMouseEvent *e) {}
-	void Tool::mouseDoubleClickEvent(QMouseEvent *e) {}
-	void Tool::mouseMoveEvent(QMouseEvent *e) {}
-	void Tool::wheelEvent(QWheelEvent *e) {}
+	void Tool::mousePressEvent(QMouseEvent *e) {e->ignore();}
+	void Tool::mouseReleaseEvent(QMouseEvent *e) {e->ignore();}
+	void Tool::mouseDoubleClickEvent(QMouseEvent *e) {e->ignore();}
+	void Tool::mouseMoveEvent(QMouseEvent *e) {e->ignore();}
+	void Tool::wheelEvent(QWheelEvent *e) {e->ignore();}
 }

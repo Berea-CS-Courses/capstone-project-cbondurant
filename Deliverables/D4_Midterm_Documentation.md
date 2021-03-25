@@ -3,6 +3,11 @@
 This is the current state of my proof of concept: 
 
 ![A collection of lines that are all deformed like a river would be](./img/Lipuma_Demo1.png)
+The ability to draw lines.
+
+![More lines, now some of them are red](./img/Lipuma_Demo2.png)
+Highlighting of lines that have been selected with the selection tool.
+
 
 ## Concept Documentation
 
@@ -20,6 +25,7 @@ Note: This program has currently only been built on linux, for linux systems. No
 2. Use the instructions for installation from the FastNoise library to install its depenancies
 3. in the root directory run `qmake` followed by `make`
 4. The binary will be built at `./build/bin/lipuma`
+5. Two tools currently can be used in the tool, press S to enable the selection tool, and F to enable the fractal line tool
 
 ### Current functional state
 

@@ -15,15 +15,18 @@ namespace Lipuma {
 		line = new FractalLine(e->pos(), e->pos());
 		Canvas::singleton->scene()->addItem(line);
 		isDrawing = true;
+        e->accept();
 	}
 
 	void FractalTool::mouseMoveEvent(QMouseEvent *e){
 		if (isDrawing) line->setEnd(e->pos());
+        e->accept();
 	}
 
 	void FractalTool::mouseReleaseEvent(QMouseEvent *e){
 		// Im not sure if I should unset the line here.
 		isDrawing = false;
+        e->accept();
 	}
 
 	void FractalTool::wheelEvent(QWheelEvent *e){
@@ -37,5 +40,6 @@ namespace Lipuma {
 				line->setFrequency(freq * 0.9);
 			}
 		}
+        e->accept();
 	}
 }
