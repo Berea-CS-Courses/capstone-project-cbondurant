@@ -1,7 +1,7 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QMessageLogger>
-#include <fractalLine.hpp>
+#include <drawable/fractalLine.hpp>
 #include <tool/fractalTool.hpp>
 #include <canvas.hpp>
 

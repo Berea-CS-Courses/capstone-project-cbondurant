@@ -5,7 +5,7 @@
 #include <QWheelEvent>
 
 #include "tool/tool.hpp"
-#include "fractalLine.hpp"
+#include "drawable/fractalLine.hpp"
 
 namespace Lipuma {
 

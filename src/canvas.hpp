@@ -1,13 +1,14 @@
-#ifndef CANVAS_H_
-#define CANVAS_H_
+#ifndef CANVAS_HPP
+#define CANVAS_HPP
 
 #include <QGraphicsView>
+#include <QGraphicsItem>
 #include <QPointF>
 #include <QWheelEvent>
-#include <vector>
+#include <set>
 
-#include "fractalLine.hpp"
 #include "tool/tool.hpp"
+#include "drawable/drawable.hpp"
 namespace Lipuma {
 	/*
 		Subclass of the QGraphics view.
@@ -18,11 +19,14 @@ namespace Lipuma {
 
 	public:
 		explicit Canvas(QGraphicsScene *parent = nullptr);
-		FractalLine *line;
 
 		Tool *getCurrentTool();
 		void setCurrentTool(Tool *brush);
 		static Canvas *singleton;
+
+        void selectObject(Drawable*);
+        void deselectObject(Drawable*);
+        const std::set<Drawable*>& getObjectIterator() const;
 
 	protected:
 		void wheelEvent(QWheelEvent *e) override;
@@ -36,8 +40,8 @@ namespace Lipuma {
 		QPointF _offset;
 		bool _isPanning;
 		QPoint _panPrev;
-		std::vector<FractalLine*> lines;
+		std::set<Drawable*> *selected;
 	};
 
 }
-#endif // CANVAS_H_
+#endif // CANVAS_HPP

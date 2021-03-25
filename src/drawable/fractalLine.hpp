@@ -1,5 +1,5 @@
-#ifndef FRACTAL_LINE_H_
-#define FRACTAL_LINE_H_
+#ifndef DRAWABLE_FRACTAL_LINE_HPP
+#define DRAWABLE_FRACTAL_LINE_HPP
 
 #include <QPointF>
 #include <QRectF>
@@ -44,4 +44,4 @@ namespace Lipuma {
 	};
 }
 
-#endif // FRACTAL_LINE_H_
+#endif // DRAWABLE_FRACTAL_LINE_HPP

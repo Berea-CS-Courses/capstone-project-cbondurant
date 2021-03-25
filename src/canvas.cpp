@@ -1,13 +1,15 @@
 #include <QPointF>
 #include <QPainter>
 #include <QGraphicsView>
+#include <QGraphicsItem>
 #include <iostream>
 #include <cstdlib>
-#include <vector>
+#include <set>
 #include <cmath>
 #include "canvas.hpp"
 #include "tool/tool.hpp"
 #include "tool/fractalTool.hpp"
+#include "drawable/drawable.hpp"
 
 namespace Lipuma {
 	Canvas::Canvas(QGraphicsScene *parent) : QGraphicsView(parent){
@@ -17,9 +19,24 @@ namespace Lipuma {
 		setResizeAnchor(QGraphicsView::AnchorUnderMouse);
 		_currentTool = new FractalTool();
 		setSceneRect(0, 0, 2000, 2000);
+        selected = new std::set<Drawable*>();
 	}
 
 	Canvas *Canvas::singleton = nullptr;
+
+    void Canvas::selectObject(Drawable* item){
+        item->selected = true;
+        selected->insert(item); 
+    }
+
+    void Canvas::deselectObject(Drawable* item){
+        item->selected = false;
+        selected->erase(item);
+    }
+
+    const std::set<Drawable*>& Canvas::getObjectIterator() const{
+        return *selected;
+    }
 
 	void Canvas::wheelEvent(QWheelEvent *e){
 		_currentTool->wheelEvent(e);

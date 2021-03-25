@@ -1,5 +1,5 @@
-#ifndef POINT_HELPER_H
-#define POINT_HELPER_H
+#ifndef POINT_HELPER_HPP
+#define POINT_HELPER_HPP
 
 #include <QPointF>
 #include <cmath>
@@ -26,4 +26,4 @@ namespace Lipuma{
 	}
 }
 
-#endif //POINT_HELPER_H
+#endif // POINT_HELPER_HPP
