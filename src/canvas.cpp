@@ -58,6 +58,14 @@ namespace Lipuma {
             _currentTool->enableEvent(); 
             e->accept();
         }
+        if (e->key() == Qt::Key_Delete || e->key() == Qt::Key_Backspace){
+            auto itemList = scene()->selectedItems();
+            for (auto i = itemList.begin(); i != itemList.end(); i++){
+                scene()->removeItem(*i);
+                delete *i;
+            } 
+            e->accept();
+        }
         QGraphicsView::keyPressEvent(e);
     }
 

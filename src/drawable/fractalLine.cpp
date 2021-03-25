@@ -5,13 +5,16 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QWidget>
+#include <QtDebug>
 #include <FastNoise/FastNoise.h>
+#include <cmath>
+#include <QMessageLogger>
 #include "fractalLine.hpp"
 #include "pointHelper.hpp"
 
 #include <vector>
 namespace Lipuma {
-	FractalLine::FractalLine(QPointF start, QPointF end) : start(start), end(end){
+	FractalLine::FractalLine(QPointF s, QPointF e){
         setFlag(QGraphicsItem::ItemIsSelectable);
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
@@ -19,6 +22,8 @@ namespace Lipuma {
 		noise->SetOctaveCount(50);
 		noise->SetLacunarity(2.0f);
 		noise->SetGain(.09);
+        setStart(s);
+        setEnd(e);
 	}
 
 	QRectF FractalLine::boundingRect() const {
@@ -28,13 +33,17 @@ namespace Lipuma {
 	}
 
 	void FractalLine::setStart(QPointF s){
-		start = s;
+		setPos(s);
 		prepareGeometryChange();
 		update();
 	}
 
 	void FractalLine::setEnd(QPointF e){
-		end = e;
+        QPointF delta = pos()-e;
+        double d = Lipuma::distance(delta);
+        double theta = atan2(-delta.y(),-delta.x());
+        setRotation(theta*180/3.1415);
+        end = QPoint(d,0);
 		prepareGeometryChange();
 		update();
 	}
@@ -50,6 +59,7 @@ namespace Lipuma {
 	}
 
 	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+        painter->setRenderHint(QPainter::Antialiasing);
         if (isSelected()){
             painter->setPen(QColor(255,0,0));            
         }
