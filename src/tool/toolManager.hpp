@@ -5,6 +5,8 @@
 #include "tool/selectionTool.hpp"
 
 namespace Lipuma {
+    // The tool manager is a purely static class
+    // All methods allow access to singleton tool objects.
     class ToolManager{
     public:
         static FractalTool* getFractalTool();

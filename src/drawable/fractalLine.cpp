@@ -58,6 +58,11 @@ namespace Lipuma {
 		update();
 	}
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+    // the option and widget fields are required for this interface but unused,
+    // Silencing warning for unused parameter
+   
 	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
         painter->setRenderHint(QPainter::Antialiasing);
         if (isSelected()){
@@ -78,6 +83,7 @@ namespace Lipuma {
 			path.lineTo(point);
 		}
 		painter->drawPath(path);
-		//painter->drawRect(boundingRect());
+		painter->drawRect(boundingRect());
 	}
+#pragma GCC diagnostic pop
 }

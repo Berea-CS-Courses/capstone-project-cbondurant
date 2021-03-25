@@ -22,12 +22,15 @@ namespace Lipuma {
 		QRectF boundingRect() const override;
 		void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
 
+        // Get the rate at which fractal layers decrease in effect
 		float getLacunarity();
+        // Set the rate at which fractal layers decrease in effect
 		void setLacunarity(float);
 
 		void setStart(QPointF);
 		void setEnd(QPointF);
 		
+        // Get frequency of crossing the zero per unit
 		float getFrequency();
 		void setFrequency(float);
 
