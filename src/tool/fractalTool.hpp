@@ -3,6 +3,7 @@
 
 #include <QMouseEvent>
 #include <QWheelEvent>
+#include <QGraphicsView>
 
 #include "tool/tool.hpp"
 #include "drawable/fractalLine.hpp"
@@ -16,10 +17,10 @@ namespace Lipuma {
 	public:
 		FractalTool();
 
-		void mousePressEvent(QMouseEvent *e) override;
-		void mouseReleaseEvent(QMouseEvent *e) override;
-		void mouseMoveEvent(QMouseEvent *e) override;
-		void wheelEvent(QWheelEvent *e) override;
+		void mousePressEvent(QMouseEvent *e, QGraphicsView *view) override;
+		void mouseReleaseEvent(QMouseEvent *e, QGraphicsView *view) override;
+		void mouseMoveEvent(QMouseEvent *e, QGraphicsView *view) override;
+		void wheelEvent(QWheelEvent *e, QGraphicsView *view) override;
 	private:
 		FractalLine *line;
 		bool isDrawing;

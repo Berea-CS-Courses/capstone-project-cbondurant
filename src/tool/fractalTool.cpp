@@ -1,9 +1,9 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
 #include <QMessageLogger>
+#include <QGraphicsView>
 #include <drawable/fractalLine.hpp>
 #include <tool/fractalTool.hpp>
-#include <canvas.hpp>
 
 namespace Lipuma {
 	FractalTool::FractalTool(){
@@ -11,25 +11,40 @@ namespace Lipuma {
 		isDrawing = false;
 	}
 
-	void FractalTool::mousePressEvent(QMouseEvent *e){
-		line = new FractalLine(e->pos(), e->pos());
-		Canvas::singleton->scene()->addItem(line);
-		isDrawing = true;
-        e->accept();
+	void FractalTool::mousePressEvent(QMouseEvent *e, QGraphicsView *view){
+        if (e->button() == Qt::LeftButton){
+            QPointF canvaspos = view->mapToScene(e->pos());
+            line = new FractalLine(canvaspos, canvaspos);
+            view->scene()->addItem(line);
+            view->scene()->clearSelection();
+            isDrawing = true;
+            e->accept();
+        }else{
+            e->ignore();
+        }
 	}
 
-	void FractalTool::mouseMoveEvent(QMouseEvent *e){
-		if (isDrawing) line->setEnd(e->pos());
-        e->accept();
+	void FractalTool::mouseMoveEvent(QMouseEvent *e, QGraphicsView *view){
+        QPointF canvaspos = view->mapToScene(e->pos());
+		if (isDrawing) {
+            line->setEnd(canvaspos);
+            e->accept();
+        }else{
+            e->ignore();
+        }
 	}
 
-	void FractalTool::mouseReleaseEvent(QMouseEvent *e){
+	void FractalTool::mouseReleaseEvent(QMouseEvent *e, QGraphicsView *view){
 		// Im not sure if I should unset the line here.
-		isDrawing = false;
-        e->accept();
+		if (isDrawing){
+            isDrawing = false;
+            e->accept();
+        }else{
+            e->ignore();
+        }
 	}
 
-	void FractalTool::wheelEvent(QWheelEvent *e){
+	void FractalTool::wheelEvent(QWheelEvent *e, QGraphicsView *view){
 		if (isDrawing){
 			float freq = line->getFrequency();
 			if (e->angleDelta().y() > 0){
@@ -39,7 +54,9 @@ namespace Lipuma {
 			}else{
 				line->setFrequency(freq * 0.9);
 			}
-		}
-        e->accept();
+            e->accept();
+		}else{
+            e->ignore();
+        }
 	}
 }

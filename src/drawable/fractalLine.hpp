@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <QPolygonF>
 #include <FastNoise/FastNoise.h>
+#include <random>
 
 namespace Lipuma {
 
@@ -27,7 +28,10 @@ namespace Lipuma {
         // Set the rate at which fractal layers decrease in effect
 		void setLacunarity(float);
 
+        // Set the starting point of the line in canvas space
 		void setStart(QPointF);
+        
+        // Set the endpoint of the line in canvas space
 		void setEnd(QPointF);
 		
         // Get frequency of crossing the zero per unit
@@ -37,13 +41,14 @@ namespace Lipuma {
 	private:
 		FastNoise::SmartNode<FastNoise::Fractal<>> noise;
 		static const int SEGMENTS = 100;
-
-		// 
 		static const int PERIOD = 2;
+        static const int HEIGHT = 10;
 
 		QPointF start, end;
 
 		float frequency;
+        int seed;
+        static std::default_random_engine rand;
 	};
 }
 

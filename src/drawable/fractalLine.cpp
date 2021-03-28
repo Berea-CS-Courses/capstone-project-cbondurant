@@ -8,28 +8,31 @@
 #include <QtDebug>
 #include <FastNoise/FastNoise.h>
 #include <cmath>
+#include <random>
 #include <QMessageLogger>
 #include "fractalLine.hpp"
 #include "pointHelper.hpp"
 
 #include <vector>
 namespace Lipuma {
+
+    std::default_random_engine FractalLine::rand;
+    
 	FractalLine::FractalLine(QPointF s, QPointF e){
+        seed = FractalLine::rand();
         setFlag(QGraphicsItem::ItemIsSelectable);
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
-		frequency = 20;
-		noise->SetOctaveCount(50);
+		frequency = 0.05;
+		noise->SetOctaveCount(5);
 		noise->SetLacunarity(2.0f);
-		noise->SetGain(.09);
+		noise->SetGain(.9);
         setStart(s);
         setEnd(e);
 	}
 
 	QRectF FractalLine::boundingRect() const {
-		QMargins extent(10,10,10,10);
-		return QRectF(start, start).marginsAdded(extent)
-		.united(QRectF(end, end).marginsAdded(extent));
+		return QRectF(start.x()-5,-HEIGHT,end.x()+10,HEIGHT*2);
 	}
 
 	void FractalLine::setStart(QPointF s){
@@ -39,11 +42,11 @@ namespace Lipuma {
 	}
 
 	void FractalLine::setEnd(QPointF e){
-        QPointF delta = pos()-e;
-        double d = Lipuma::distance(delta);
-        double theta = atan2(-delta.y(),-delta.x());
+        QPointF delta = e - pos();
+        double distance = Lipuma::distance(delta);
+        double theta = atan2(delta.y(),delta.x());
         setRotation(theta*180/3.1415);
-        end = QPoint(d,0);
+        end = QPointF(distance,0);
 		prepareGeometryChange();
 		update();
 	}
@@ -64,26 +67,32 @@ namespace Lipuma {
     // Silencing warning for unused parameter
    
 	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
-        painter->setRenderHint(QPainter::Antialiasing);
+		painter->setRenderHint(QPainter::Antialiasing, true);
+		// Set highlight color if selected
         if (isSelected()){
-            painter->setPen(QColor(255,0,0));            
+            painter->setPen(QColor(255,0,0));
         }
-		const int POINTS = (distance(start-end) / PERIOD) + 8; 
-		float curve[POINTS] = {};
-		noise->GenUniformGrid2D(curve,0,0,POINTS,1,frequency,1337);
+
+		// Dont draw really really short lines 
+		if (end.x() < 0.1) return;
+
+		// Figure out the number of points to render the line with
+		const int POINTS = end.x() / PERIOD;
+		float curve[((POINTS+8)/8)*8] = {}; // Round to nearest multiple of 8, fastnoise runs better with it
+		noise->GenUniformGrid2D(curve,0,0,((POINTS+8)/8)*8,1,frequency,seed);
+
+		// Generate path
 		QPainterPath path;
-		path.moveTo(start);
-		if (distance(end-start) < 1){return;}
-		QPointF perp = Lipuma::normalize((end - start).transposed());
-		perp.setX(-perp.x());
-		for (int i = 1; i <= POINTS; i++){
-			QPointF point = Lipuma::lerp(start, end, (float)i/POINTS);
-			point += perp * curve[i-1]*5;
-			assert (abs(point.x()) < 100000);
+		// First and last point need to always be at zero, so skip the 0th element and the final element
+		for (int i = 1; i < POINTS; i++){
+			QPointF point = Lipuma::lerp(start, QPointF(POINTS*PERIOD,0), static_cast<float>(i)/static_cast<float>(POINTS));
+			point += QPointF(0, curve[i-1]*HEIGHT);
 			path.lineTo(point);
 		}
+		// Draw final point
+        path.lineTo(end);
 		painter->drawPath(path);
-		painter->drawRect(boundingRect());
+		//painter->drawRect(boundingRect());
 	}
 #pragma GCC diagnostic pop
 }
