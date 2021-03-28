@@ -17,6 +17,5 @@ int main (int argc, char **argv){
     mainWin->menuBar()->addMenu("Lipuma");
 
     mainWin->show();
-	Lipuma::Canvas::singleton = canvas;
 	return a.exec();
 }

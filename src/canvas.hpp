@@ -24,8 +24,6 @@ namespace Lipuma {
 		Tool *getCurrentTool();
         // Set the currently used tool
 		void setCurrentTool(Tool *brush);
-        // Static reference to a singleton canvas object
-		static Canvas *singleton;
 
 	protected:
 		void wheelEvent(QWheelEvent *e) override;
