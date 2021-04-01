@@ -5,6 +5,7 @@
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 #include <QWidget>
+#include <QGraphicsScene>
 #include <QtDebug>
 #include <FastNoise/FastNoise.h>
 #include <cmath>
@@ -12,23 +13,32 @@
 #include <QMessageLogger>
 #include "fractalLine.hpp"
 #include "pointHelper.hpp"
+#include "drawable/editPoint.hpp"
 
 #include <vector>
 namespace Lipuma {
 
-    std::default_random_engine FractalLine::rand;
-    
+	std::default_random_engine FractalLine::rand;
+
 	FractalLine::FractalLine(QPointF s, QPointF e){
-        seed = FractalLine::rand();
-        setFlag(QGraphicsItem::ItemIsSelectable);
+	seed = FractalLine::rand();
+	setFlag(QGraphicsItem::ItemIsSelectable);
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
 		frequency = 0.05;
 		noise->SetOctaveCount(5);
 		noise->SetLacunarity(2.0f);
 		noise->SetGain(.9);
-        setStart(s);
-        setEnd(e);
+		startPt = new EditPoint();
+		startPt->setParentItem(this);
+		startPt->setVisible(false);
+		connect(startPt, &EditPoint::pointMoved, this, &FractalLine::setStart);
+		endPt = new EditPoint();
+		endPt->setParentItem(this);
+		endPt->setVisible(false);
+		connect(endPt, &EditPoint::pointMoved, this, &FractalLine::setEnd);
+		setStart(s);
+	setEnd(e);
 	}
 
 	QRectF FractalLine::boundingRect() const {
@@ -36,23 +46,34 @@ namespace Lipuma {
 	}
 
 	void FractalLine::setStart(QPointF s){
+		// Store end location to keep end in place.
+		QPointF gEnd = mapToScene(end);
 		setPos(s);
-		prepareGeometryChange();
-		update();
+		setEnd(gEnd);
 	}
 
 	void FractalLine::setEnd(QPointF e){
-        QPointF delta = e - pos();
-        double distance = Lipuma::distance(delta);
-        double theta = atan2(delta.y(),delta.x());
-        setRotation(theta*180/3.1415);
-        end = QPointF(distance,0);
+		QPointF delta = e - pos();
+		qreal distance = Lipuma::distance(delta);
+		qreal theta = atan2l(delta.y(), delta.x());
+		// TODO: I do not know if M_PIl is a reliable constant, as it is compiler defined
+		setRotation((theta/M_PIl)*180.0L);
+		end = QPointF(distance,0);
 		prepareGeometryChange();
-		update();
+		endPt->setPos(end);
 	}
 
 	float FractalLine::getFrequency(){
 		return frequency;
+	}
+
+	QVariant FractalLine::itemChange(GraphicsItemChange change, const QVariant &val){
+		QGraphicsItem::itemChange(change, val);
+		if (change == ItemSelectedChange && scene()){
+			startPt->setVisible(val.toBool());
+			endPt->setVisible(val.toBool());
+		}
+		return val;
 	}
 
 	void FractalLine::setFrequency(float f){
@@ -61,12 +82,7 @@ namespace Lipuma {
 		update();
 	}
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-parameter"
-    // the option and widget fields are required for this interface but unused,
-    // Silencing warning for unused parameter
-   
-	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){
+	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
 		painter->setRenderHint(QPainter::Antialiasing, true);
 		// Set highlight color if selected
         if (isSelected()){
@@ -94,5 +110,4 @@ namespace Lipuma {
 		painter->drawPath(path);
 		//painter->drawRect(boundingRect());
 	}
-#pragma GCC diagnostic pop
 }

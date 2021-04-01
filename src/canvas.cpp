@@ -25,13 +25,13 @@ namespace Lipuma {
         setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
 
 
-        // TODO: Graphics to mark the center of the scene
+        // DEBUG: Graphics to mark the center of the scene
         scene()->addLine(-1,-1,1,1);
         scene()->addLine(-1,1,1,-1);
-        scene()->addItem(new FractalLine(QPoint(100,100), QPointF(100,-100)));
-        scene()->addItem(new FractalLine(QPoint(100,-100), QPointF(-100,-100)));
-        scene()->addItem(new FractalLine(QPoint(-100,-100), QPointF(-100,100)));
-        scene()->addItem(new FractalLine(QPoint(-100,100), QPointF(100,100)));
+        scene()->addItem(new FractalLine(QPoint(110,100), QPointF(110,-100)));
+        scene()->addItem(new FractalLine(QPoint(100,-110), QPointF(-100,-110)));
+        scene()->addItem(new FractalLine(QPoint(-110,-100), QPointF(-110,100)));
+        scene()->addItem(new FractalLine(QPoint(-100,110), QPointF(100,110)));
         setSceneRect(-1000, -1000, 2000, 2000);
 	}
 
@@ -55,15 +55,11 @@ namespace Lipuma {
 		}
 	}
 
+    void Canvas::toolSelected(Tool *tool){
+        setCurrentTool(tool);
+    }
+
     void Canvas::keyPressEvent(QKeyEvent *e){
-        if (e->key() == Qt::Key_S && _currentTool != ToolManager::getSelectionTool()){
-            setCurrentTool(ToolManager::getSelectionTool());
-            e->accept();
-        }
-        if (e->key() == Qt::Key_F && _currentTool != ToolManager::getFractalTool()){
-            setCurrentTool(ToolManager::getFractalTool());
-            e->accept();
-        }
         if (e->key() == Qt::Key_Delete || e->key() == Qt::Key_Backspace){
             auto itemList = scene()->selectedItems();
             for (auto i = itemList.begin(); i != itemList.end(); i++){

@@ -1,10 +1,13 @@
 #include <QApplication>
 #include <QMainWindow>
 #include <QPainter>
+#include <QMenu>
+#include <QAction>
 #include <QDockWidget>
 #include <QTextEdit>
 #include <QtWidgets>
 #include "canvas.hpp"
+
 #include "widget/toolSelector.hpp"
 
 int main (int argc, char **argv){
@@ -14,7 +17,11 @@ int main (int argc, char **argv){
     QMainWindow *mainWin = new QMainWindow();
     mainWin->setCentralWidget(canvas);
 
-    mainWin->menuBar()->addMenu("Lipuma");
+    QDockWidget *dock = new QDockWidget();
+    Lipuma::ToolSelector *selector = new Lipuma::ToolSelector(dock);
+    QObject::connect(selector, &Lipuma::ToolSelector::toolSelected, canvas, &Lipuma::Canvas::toolSelected);
+    dock->setWidget(selector);
+    mainWin->addDockWidget(Qt::LeftDockWidgetArea, dock);
 
     mainWin->show();
 	return a.exec();

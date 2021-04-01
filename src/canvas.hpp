@@ -33,6 +33,9 @@ namespace Lipuma {
 		void mouseDoubleClickEvent(QMouseEvent *e) override;
 		void keyPressEvent(QKeyEvent *e) override;
 
+	public slots:
+		void toolSelected(Tool *tool);
+
 	private:
 		Tool *_currentTool;
 		QPointF _offset;

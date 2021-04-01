@@ -3,10 +3,12 @@
 
 #include <QPointF>
 #include <QRectF>
-#include <QGraphicsItem>
+#include <QGraphicsObject>
 #include <QPolygonF>
 #include <FastNoise/FastNoise.h>
 #include <random>
+
+#include "drawable/editPoint.hpp"
 
 namespace Lipuma {
 
@@ -16,12 +18,14 @@ namespace Lipuma {
 		Lacunarity: how much the frequency increases each iteration.
 		Gain: how much the amplitude of each iteration decreases.
 	*/
-	class FractalLine : public QGraphicsItem {
+	class FractalLine : public QGraphicsObject {
 
 	public:
 		FractalLine(QPointF, QPointF);
 		QRectF boundingRect() const override;
 		void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+
+		QVariant itemChange(GraphicsItemChange, const QVariant &val) override;
 
         // Get the rate at which fractal layers decrease in effect
 		float getLacunarity();
@@ -43,6 +47,8 @@ namespace Lipuma {
 		static const int SEGMENTS = 100;
 		static const int PERIOD = 2;
         static const int HEIGHT = 10;
+
+		EditPoint *startPt, *endPt;
 
 		QPointF start, end;
 
