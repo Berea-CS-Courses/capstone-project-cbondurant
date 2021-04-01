@@ -42,6 +42,8 @@ The current version of the code creates a window that the user can click and dra
 
 All code in this repository has been written by me, the style guide that I am poorly following is the [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html).
 
+Some guidance has been obtained from the Qt5 API documentation, to copy commonly used patterns of best design.
+
 ## Reflection
 
 I feel relatively confident in my ability to extend this project to a more fully fledged project worth continuing. I have a strong conception of how I will implement a large number of the most important features of this codebase, and I have already found myself making important refactors early on as they need to be implemented.
