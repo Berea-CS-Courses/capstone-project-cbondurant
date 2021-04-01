@@ -11,6 +11,11 @@ Highlighting of lines that have been selected with the selection tool.
 ![Some lines, with a box over a collection of them, each one underneath the box is highlighted red](./img/Lipuma_Demo3.png)
 Lines can be selected using a box selector in the box tool, or by control clicking to select multiple.
 
+![Lines, now with square points that define controllable locations on the line that can be edited](./img/Lipuma_Demo4.png)
+After selecting a line, you can move the endpoints around and adjust the location.
+
+Additionally boxes now exist that define the state of the lines.
+
 ## Concept Documentation
 
 ### Dependancies
