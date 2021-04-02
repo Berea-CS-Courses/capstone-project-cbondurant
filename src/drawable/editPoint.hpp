@@ -17,7 +17,7 @@ namespace Lipuma {
 		void mouseReleaseEvent(QGraphicsSceneMouseEvent *e) override;
 
 		QRectF boundingRect() const override;
-		void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *);
+		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	signals:
 		void pointMoved(QPointF);

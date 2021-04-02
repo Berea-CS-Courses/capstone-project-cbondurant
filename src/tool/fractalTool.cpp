@@ -34,7 +34,7 @@ namespace Lipuma {
 		}
 	}
 
-	void FractalTool::mouseReleaseEvent(QMouseEvent *e, QGraphicsView *view){
+	void FractalTool::mouseReleaseEvent(QMouseEvent *e, QGraphicsView */* view */){
 		// Im not sure if I should unset the line here.
 		if (isDrawing){
 			isDrawing = false;
@@ -44,7 +44,7 @@ namespace Lipuma {
 		}
 	}
 
-	void FractalTool::wheelEvent(QWheelEvent *e, QGraphicsView *view){
+	void FractalTool::wheelEvent(QWheelEvent *e, QGraphicsView */* view */){
 		if (isDrawing){
 			float freq = line->getFrequency();
 			if (e->angleDelta().y() > 0){
