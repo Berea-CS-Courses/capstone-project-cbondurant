@@ -20,13 +20,11 @@ namespace Lipuma {
 		void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
 	signals:
+		// Emits when the point is selected and dragged
 		void pointMoved(QPointF);
 
 	private:
 		bool _isTracking;
-
-		// The function to be called on the parent
-
 	};
 }
 

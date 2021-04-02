@@ -14,13 +14,14 @@ namespace Lipuma{
 	}
 
 	/*
-		Normalizes a 2d vector represented as a QPointF to length 1u
+		Normalizes a 2d vector represented as a QPointF to unit length
 	*/
 	QPointF normalize(QPointF p){
 		qreal d = sqrt(abs(QPointF::dotProduct(p,p)));
 		return p/d;
 	}
 
+	// Computes the euclidan distance of a vector
 	qreal distance(QPointF p){
 		return sqrt(abs(QPointF::dotProduct(p,p)));
 	}
