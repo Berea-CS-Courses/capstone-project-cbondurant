@@ -1,5 +1,2 @@
 build
-Makefile*
-.qmake.stash
 .vscode
-.*.swp
