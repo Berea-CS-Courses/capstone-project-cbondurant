@@ -1,5 +1,5 @@
-#ifndef BRUSH_BRUSH_HPP
-#define BRUSH_BRUSH_HPP
+#ifndef TOOL_TOOL_HHP
+#define TOOL_TOOL_HHP
 
 #include <QMouseEvent>
 #include <QWheelEvent>
@@ -33,4 +33,4 @@ namespace Lipuma {
 	};
 }
 
-#endif // BRUSH_BRUSH_HPP
+#endif // TOOL_TOOL_HHP
