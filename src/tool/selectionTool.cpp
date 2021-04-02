@@ -1,6 +1,6 @@
 #include "tool/selectionTool.hpp"
 
-#include "canvas.hpp"
+#include "widget/canvas.hpp"
 
 namespace Lipuma {
 	void SelectionTool::mousePressEvent(QMouseEvent *e, QGraphicsView */* view */){

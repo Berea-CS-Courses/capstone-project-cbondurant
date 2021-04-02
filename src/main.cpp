@@ -6,7 +6,7 @@
 #include <QDockWidget>
 #include <QTextEdit>
 #include <QtWidgets>
-#include "canvas.hpp"
+#include "widget/canvas.hpp"
 
 #include "widget/toolSelector.hpp"
 
