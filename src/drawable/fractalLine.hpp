@@ -27,18 +27,18 @@ namespace Lipuma {
 
 		QVariant itemChange(GraphicsItemChange, const QVariant &val) override;
 
-        // Get the rate at which fractal layers decrease in effect
+		// Get the rate at which fractal layers decrease in effect
 		float getLacunarity();
-        // Set the rate at which fractal layers decrease in effect
+		// Set the rate at which fractal layers decrease in effect
 		void setLacunarity(float);
 
-        // Set the starting point of the line in canvas space
+		// Set the starting point of the line in canvas space
 		void setStart(QPointF);
-        
-        // Set the endpoint of the line in canvas space
+		
+		// Set the endpoint of the line in canvas space
 		void setEnd(QPointF);
 		
-        // Get frequency of crossing the zero per unit
+		// Get frequency of crossing the zero per unit
 		float getFrequency();
 		void setFrequency(float);
 
@@ -46,15 +46,15 @@ namespace Lipuma {
 		FastNoise::SmartNode<FastNoise::Fractal<>> noise;
 		static const int SEGMENTS = 100;
 		static const int PERIOD = 2;
-        static const int HEIGHT = 10;
+		static const int HEIGHT = 10;
 
 		EditPoint *startPt, *endPt;
 
 		QPointF start, end;
 
 		float frequency;
-        int seed;
-        static std::default_random_engine rand;
+		int seed;
+		static std::default_random_engine rand;
 	};
 }
 

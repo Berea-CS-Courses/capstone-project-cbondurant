@@ -4,9 +4,9 @@
 #include <QGraphicsItem>
 
 namespace Lipuma {
-    // An empty wrapper for QGraphicsItem in case I need custom extentions
-    class Drawable : public QGraphicsItem{
-    };
+	// An empty wrapper for QGraphicsItem in case I need custom extentions
+	class Drawable : public QGraphicsItem{
+	};
 }
 
 #endif

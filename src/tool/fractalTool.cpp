@@ -12,36 +12,36 @@ namespace Lipuma {
 	}
 
 	void FractalTool::mousePressEvent(QMouseEvent *e, QGraphicsView *view){
-        if (e->button() == Qt::LeftButton){
-            QPointF canvaspos = view->mapToScene(e->pos());
-            line = new FractalLine(canvaspos, canvaspos);
-            view->scene()->addItem(line);
-            view->scene()->clearSelection();
-            isDrawing = true;
-            e->accept();
-        }else{
-            e->ignore();
-        }
+		if (e->button() == Qt::LeftButton){
+			QPointF canvaspos = view->mapToScene(e->pos());
+			line = new FractalLine(canvaspos, canvaspos);
+			view->scene()->addItem(line);
+			view->scene()->clearSelection();
+			isDrawing = true;
+			e->accept();
+		}else{
+			e->ignore();
+		}
 	}
 
 	void FractalTool::mouseMoveEvent(QMouseEvent *e, QGraphicsView *view){
-        QPointF canvaspos = view->mapToScene(e->pos());
+		QPointF canvaspos = view->mapToScene(e->pos());
 		if (isDrawing) {
-            line->setEnd(canvaspos);
-            e->accept();
-        }else{
-            e->ignore();
-        }
+			line->setEnd(canvaspos);
+			e->accept();
+		}else{
+			e->ignore();
+		}
 	}
 
 	void FractalTool::mouseReleaseEvent(QMouseEvent *e, QGraphicsView *view){
 		// Im not sure if I should unset the line here.
 		if (isDrawing){
-            isDrawing = false;
-            e->accept();
-        }else{
-            e->ignore();
-        }
+			isDrawing = false;
+			e->accept();
+		}else{
+			e->ignore();
+		}
 	}
 
 	void FractalTool::wheelEvent(QWheelEvent *e, QGraphicsView *view){
@@ -54,9 +54,9 @@ namespace Lipuma {
 			}else{
 				line->setFrequency(freq * 0.9);
 			}
-            e->accept();
+			e->accept();
 		}else{
-            e->ignore();
-        }
+			e->ignore();
+		}
 	}
 }

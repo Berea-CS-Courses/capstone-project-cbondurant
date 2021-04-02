@@ -85,9 +85,9 @@ namespace Lipuma {
 	void FractalLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *){
 		painter->setRenderHint(QPainter::Antialiasing, true);
 		// Set highlight color if selected
-        if (isSelected()){
-            painter->setPen(QColor(255,0,0));
-        }
+		if (isSelected()){
+			painter->setPen(QColor(255,0,0));
+		}
 
 		// Dont draw really really short lines 
 		if (end.x() < 0.1) return;
@@ -106,7 +106,7 @@ namespace Lipuma {
 			path.lineTo(point);
 		}
 		// Draw final point
-        path.lineTo(end);
+		path.lineTo(end);
 		painter->drawPath(path);
 		//painter->drawRect(boundingRect());
 	}
