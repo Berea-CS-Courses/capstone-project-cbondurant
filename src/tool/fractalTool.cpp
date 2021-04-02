@@ -1,8 +1,10 @@
+#include <tool/fractalTool.hpp>
+
+#include <QGraphicsView>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QGraphicsView>
+
 #include <drawable/fractalLine.hpp>
-#include <tool/fractalTool.hpp>
 
 namespace Lipuma {
 	FractalTool::FractalTool(){

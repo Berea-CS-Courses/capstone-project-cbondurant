@@ -2,8 +2,8 @@
 #define DRAWABLE_EDIT_POINT_HPP
 
 #include <QGraphicsObject>
-#include <QPointF>
 #include <QGraphicsSceneMouseEvent>
+#include <QPointF>
 
 namespace Lipuma {
 	class EditPoint : public QGraphicsObject {

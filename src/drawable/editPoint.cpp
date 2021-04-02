@@ -1,6 +1,7 @@
+#include "drawable/editPoint.hpp"
+
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
-#include "drawable/editPoint.hpp"
 
 namespace Lipuma {
 	EditPoint::EditPoint() : _isTracking(false){ setFlag(ItemIgnoresTransformations); }

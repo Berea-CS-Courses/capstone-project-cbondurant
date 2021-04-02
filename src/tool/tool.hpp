@@ -1,9 +1,9 @@
 #ifndef TOOL_TOOL_HHP
 #define TOOL_TOOL_HHP
 
+#include <QGraphicsView>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QGraphicsView>
 
 namespace Lipuma {
 /*

@@ -1,15 +1,18 @@
-#include <QColor>
-#include <QGraphicsItem>
-#include <QRectF>
-#include <QPainter>
-#include <QStyleOptionGraphicsItem>
-#include <QWidget>
-#include <FastNoise/FastNoise.h>
+#include "fractalLine.hpp"
+
 #include <cmath>
 #include <random>
-#include "fractalLine.hpp"
-#include "pointHelper.hpp"
+
+#include <FastNoise/FastNoise.h>
+#include <QColor>
+#include <QGraphicsItem>
+#include <QPainter>
+#include <QRectF>
+#include <QStyleOptionGraphicsItem>
+#include <QWidget>
+
 #include "drawable/editPoint.hpp"
+#include "pointHelper.hpp"
 
 namespace Lipuma {
 

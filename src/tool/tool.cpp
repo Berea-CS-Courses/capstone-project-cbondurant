@@ -1,8 +1,9 @@
+#include "tool/tool.hpp"
+
+#include <QGraphicsView>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QGraphicsView>
 
-#include "tool/tool.hpp"
 
 namespace Lipuma {
 	Tool::Tool() {}

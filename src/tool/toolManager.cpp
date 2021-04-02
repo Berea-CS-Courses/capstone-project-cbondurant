@@ -1,4 +1,5 @@
 #include "tool/toolManager.hpp"
+
 #include "tool/fractalTool.hpp"
 #include "tool/selectionTool.hpp"
 
