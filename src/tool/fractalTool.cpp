@@ -1,6 +1,5 @@
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QMessageLogger>
 #include <QGraphicsView>
 #include <drawable/fractalLine.hpp>
 #include <tool/fractalTool.hpp>

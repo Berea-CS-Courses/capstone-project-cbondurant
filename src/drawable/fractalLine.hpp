@@ -4,7 +4,6 @@
 #include <QPointF>
 #include <QRectF>
 #include <QGraphicsObject>
-#include <QPolygonF>
 #include <FastNoise/FastNoise.h>
 #include <random>
 
