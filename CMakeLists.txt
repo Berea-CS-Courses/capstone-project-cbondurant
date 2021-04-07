@@ -13,12 +13,18 @@ if(CMAKE_VERISON VERSION_LESS "3.7.0")
 	set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+	include(CTest)
+endif()
+
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Gui REQUIRED)
 include_directories(${Qt5Gui_INCLUDE_DIRS}, {Qt5Widgets_INCLUDE_DIRS})
 include_directories(src)
 
 add_subdirectory(src)
+add_subdirectory(tests)
+
 
 add_executable(lipuma
 	src/main.cpp
