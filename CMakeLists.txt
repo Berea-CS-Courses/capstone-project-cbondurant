@@ -13,8 +13,14 @@ if(CMAKE_VERISON VERSION_LESS "3.7.0")
 	set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
+find_package(Qt5Widgets REQUIRED)
+find_package(Qt5Gui REQUIRED)
 include_directories(${Qt5Gui_INCLUDE_DIRS}, {Qt5Widgets_INCLUDE_DIRS})
 include_directories(src)
 
 add_subdirectory(src)
 
+add_executable(lipuma
+	src/main.cpp
+)
+target_link_libraries(lipuma Qt5::Gui Qt5::Widgets widget drawable tool)

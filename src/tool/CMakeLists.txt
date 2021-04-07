@@ -5,4 +5,4 @@ add_library(tool
 	toolManager.cpp
 )
 
-target_link_libraries(tool Qt5::Gui Qt5::Widgets)
+target_link_libraries(tool Qt5::Gui Qt5::Widgets drawable)
