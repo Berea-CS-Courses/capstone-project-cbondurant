@@ -19,10 +19,10 @@ namespace Lipuma {
 
 	public:
 		explicit Canvas(QGraphicsScene *parent = nullptr);
-        
-        // Provide the current tool 
+		
+		// Provide the current tool 
 		Tool *getCurrentTool();
-        // Set the currently used tool
+		// Set the currently used tool
 		void setCurrentTool(Tool *brush);
 
 	protected:

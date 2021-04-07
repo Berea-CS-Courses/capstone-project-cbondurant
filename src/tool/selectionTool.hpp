@@ -6,9 +6,9 @@
 #include "tool/tool.hpp"
 
 namespace Lipuma {
-    class SelectionTool : public Tool{
-       void mousePressEvent(QMouseEvent *e, QGraphicsView *view) override;
-    };
+	class SelectionTool : public Tool{
+		void mousePressEvent(QMouseEvent *e, QGraphicsView *view) override;
+	};
 }
 
 #endif

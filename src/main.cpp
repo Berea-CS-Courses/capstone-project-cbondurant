@@ -12,17 +12,17 @@
 
 int main (int argc, char **argv){
 	QApplication a(argc, argv);
-    QGraphicsScene scene;
+	QGraphicsScene scene;
 	Lipuma::Canvas *canvas = new Lipuma::Canvas(&scene);
-    QMainWindow *mainWin = new QMainWindow();
-    mainWin->setCentralWidget(canvas);
+	QMainWindow *mainWin = new QMainWindow();
+	mainWin->setCentralWidget(canvas);
 
-    QDockWidget *dock = new QDockWidget();
-    Lipuma::ToolSelector *selector = new Lipuma::ToolSelector(dock);
-    QObject::connect(selector, &Lipuma::ToolSelector::toolSelected, canvas, &Lipuma::Canvas::toolSelected);
-    dock->setWidget(selector);
-    mainWin->addDockWidget(Qt::LeftDockWidgetArea, dock);
+	QDockWidget *dock = new QDockWidget();
+	Lipuma::ToolSelector *selector = new Lipuma::ToolSelector(dock);
+	QObject::connect(selector, &Lipuma::ToolSelector::toolSelected, canvas, &Lipuma::Canvas::toolSelected);
+	dock->setWidget(selector);
+	mainWin->addDockWidget(Qt::LeftDockWidgetArea, dock);
 
-    mainWin->show();
+	mainWin->show();
 	return a.exec();
 }

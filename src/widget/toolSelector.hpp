@@ -8,13 +8,13 @@
 namespace Lipuma {
 
 class ToolSelector : public QWidget{
-    Q_OBJECT
+	Q_OBJECT
 
-    public:
-        ToolSelector(QWidget *w = nullptr);
+	public:
+		ToolSelector(QWidget *w = nullptr);
 
-    signals:
-        void toolSelected(Tool *tool);
+	signals:
+		void toolSelected(Tool *tool);
 };
 
 }
