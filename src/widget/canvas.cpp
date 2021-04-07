@@ -1,18 +1,21 @@
-#include <QPointF>
-#include <QPainter>
+#include "canvas.hpp"
+
+#include <cmath>
+#include <cstdlib>
+#include <iostream>
+#include <set>
+
 #include <QGraphicsView>
 #include <QGraphicsItem>
 #include <QKeyEvent>
-#include <iostream>
-#include <cstdlib>
-#include <set>
-#include <cmath>
-#include "canvas.hpp"
+#include <QPointF>
+#include <QPainter>
+
+#include "drawable/drawable.hpp"
+#include "drawable/fractalLine.hpp"
+#include "tool/fractalTool.hpp"
 #include "tool/tool.hpp"
 #include "tool/toolManager.hpp"
-#include "tool/fractalTool.hpp"
-#include "drawable/fractalLine.hpp"
-#include "drawable/drawable.hpp"
 
 namespace Lipuma {
 	Canvas::Canvas(QGraphicsScene *parent) : QGraphicsView(parent){

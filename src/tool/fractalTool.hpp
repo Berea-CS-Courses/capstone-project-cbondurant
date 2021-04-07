@@ -1,12 +1,12 @@
 #ifndef TOOL_FRACTALTOOL_HPP
 #define TOOL_FRACTALTOOL_HPP
 
+#include <QGraphicsView>
 #include <QMouseEvent>
 #include <QWheelEvent>
-#include <QGraphicsView>
 
-#include "tool/tool.hpp"
 #include "drawable/fractalLine.hpp"
+#include "tool/tool.hpp"
 
 namespace Lipuma {
 

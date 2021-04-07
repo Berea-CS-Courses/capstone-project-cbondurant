@@ -1,11 +1,12 @@
 #ifndef DRAWABLE_FRACTAL_LINE_HPP
 #define DRAWABLE_FRACTAL_LINE_HPP
 
+#include <random>
+
+#include <FastNoise/FastNoise.h>
+#include <QGraphicsObject>
 #include <QPointF>
 #include <QRectF>
-#include <QGraphicsObject>
-#include <FastNoise/FastNoise.h>
-#include <random>
 
 #include "drawable/editPoint.hpp"
 

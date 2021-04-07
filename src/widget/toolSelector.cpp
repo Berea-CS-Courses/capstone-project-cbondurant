@@ -1,9 +1,9 @@
+#include "widget/toolSelector.hpp"
 
 #include <QWidget>
 #include <QGridLayout>
 #include <QPushButton>
 #include <QShortcut>
-#include "widget/toolSelector.hpp"
 
 #include "tool/fractalTool.hpp"
 #include "tool/toolManager.hpp"
