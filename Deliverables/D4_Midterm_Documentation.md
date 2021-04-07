@@ -23,6 +23,7 @@ Additionally boxes now exist that define the state of the lines.
 The current dependancies for this project are:
 - Qt5 framework
 - Audburn/FastNoise2
+- Catch2 for testing (optional, can be built without tests)
 
 ### Build/run instructions
 
