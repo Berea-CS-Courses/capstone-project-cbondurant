@@ -47,9 +47,14 @@ TEST_CASE("Vector Normalization", "[point_helper]"){
 }
 
 TEST_CASE("Vector Distance", "[point_helper]"){
-	
-	auto point = GENERATE(QPointF(1,0), QPointF(0,1), QPointF(sqrt(0.5), sqrt(0.5)));
+
+	// Vertical, horizontal, and 45-degree vectors
+	auto point = GENERATE(QPointF(-1,0), QPointF(0,-1), QPointF(1,0), QPointF(0,1), QPointF(sqrt(0.5), sqrt(0.5)));
 	SECTION("Distance is accurate at multiple angles"){
 		REQUIRE(1 == Lipuma::distance(point));
+	}
+
+	SECTION("Distance does not fail when the vector is 0"){
+		REQUIRE(Lipuma::distance(QPointF()) == 0);
 	}
 }
