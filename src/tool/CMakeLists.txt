@@ -1,5 +1,6 @@
 add_library(tool
 	fractalTool.cpp
+	fractalCurveTool.cpp
 	selectionTool.cpp
 	tool.cpp
 	toolManager.cpp

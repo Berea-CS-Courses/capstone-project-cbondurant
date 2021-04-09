@@ -3,6 +3,7 @@
 
 #include "tool/fractalTool.hpp"
 #include "tool/selectionTool.hpp"
+#include "tool/fractalCurveTool.hpp"
 
 namespace Lipuma {
 	// The tool manager is a purely static class
@@ -10,10 +11,12 @@ namespace Lipuma {
 	class ToolManager{
 	public:
 		static FractalTool* getFractalTool();
+		static FractalCurveTool* getFractalCurveTool();
 		static SelectionTool* getSelectionTool();
 	private:
 		static FractalTool* _FractalTool;
 		static SelectionTool* _SelectionTool;
+		static FractalCurveTool* _FractalCurveTool;
 	};
 }
 #endif

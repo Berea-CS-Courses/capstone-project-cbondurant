@@ -23,5 +23,11 @@ namespace Lipuma {
 		connect(sshortcut, &QShortcut::activated, this, [=](){ toolSelected(ToolManager::getSelectionTool()); });
 		connect(select, &QPushButton::clicked, this, [=](){ toolSelected(ToolManager::getSelectionTool()); });
 		layout->addWidget(select, 0, 1);
+
+		QPushButton *curve = new QPushButton("Curve");
+		QShortcut *cshortcut = new QShortcut(Qt::Key_C, this);
+		connect(cshortcut, &QShortcut::activated, this, [=](){ toolSelected(ToolManager::getFractalCurveTool()); });
+		connect(curve, &QPushButton::clicked, this, [=](){ toolSelected(ToolManager::getFractalCurveTool()); });
+		layout->addWidget(curve, 1, 0);
 	}
 }

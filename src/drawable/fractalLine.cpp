@@ -19,11 +19,11 @@ namespace Lipuma {
 	std::default_random_engine FractalLine::rand;
 
 	FractalLine::FractalLine(QPointF s, QPointF e){
-	seed = FractalLine::rand();
-	setFlag(QGraphicsItem::ItemIsSelectable);
+		seed = FractalLine::rand();
+		setFlag(QGraphicsItem::ItemIsSelectable);
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
-		frequency = 0.05;
+		frequency = 0.02;
 		noise->SetOctaveCount(5);
 		noise->SetLacunarity(2.0f);
 		noise->SetGain(.9);
@@ -36,7 +36,7 @@ namespace Lipuma {
 		endPt->setVisible(false);
 		connect(endPt, &EditPoint::pointMoved, this, &FractalLine::setEnd);
 		setStart(s);
-	setEnd(e);
+		setEnd(e);
 	}
 
 	QRectF FractalLine::boundingRect() const {
@@ -87,7 +87,7 @@ namespace Lipuma {
 			painter->setPen(QColor(255,0,0));
 		}
 
-		// Dont draw really really short lines 
+		// Dont draw really really short lines
 		if (end.x() < 0.1) return;
 
 		// Figure out the number of points to render the line with
@@ -106,6 +106,7 @@ namespace Lipuma {
 		// Draw final point
 		path.lineTo(end);
 		painter->drawPath(path);
+		//painter->drawPath(shape());
 		//painter->drawRect(boundingRect());
 	}
 }
