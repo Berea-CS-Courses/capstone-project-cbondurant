@@ -11,7 +11,6 @@
 #include <QPointF>
 #include <QPainter>
 
-#include "drawable/drawable.hpp"
 #include "drawable/fractalLine.hpp"
 #include "tool/fractalTool.hpp"
 #include "tool/tool.hpp"
@@ -70,7 +69,7 @@ namespace Lipuma {
 			for (auto i = itemList.begin(); i != itemList.end(); i++){
 				scene()->removeItem(*i);
 				delete *i;
-			} 
+			}
 			e->accept();
 		}
 		if (!e->isAccepted()) QGraphicsView::keyPressEvent(e);

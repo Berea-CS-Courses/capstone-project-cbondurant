@@ -19,7 +19,7 @@ namespace Lipuma{
 	/*
 		Normalizes a 2d vector represented as a QPointF to unit length
 	*/
-	QPointF normalize(QPointF p){
+	inline QPointF normalize(QPointF p){
 		if (p.isNull()) return QPointF();
 		qreal d = sqrt(abs(QPointF::dotProduct(p,p)));
 		return p/d;

@@ -8,7 +8,6 @@
 #include <QKeyEvent>
 
 #include "tool/tool.hpp"
-#include "drawable/drawable.hpp"
 namespace Lipuma {
 	/*
 		Subclass of the QGraphics view.
@@ -19,8 +18,8 @@ namespace Lipuma {
 
 	public:
 		explicit Canvas(QGraphicsScene *parent = nullptr);
-		
-		// Provide the current tool 
+
+		// Provide the current tool
 		Tool *getCurrentTool();
 		// Set the currently used tool
 		void setCurrentTool(Tool *brush);

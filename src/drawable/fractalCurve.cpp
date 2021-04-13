@@ -26,8 +26,8 @@ namespace Lipuma {
 	std::default_random_engine FractalCurve::rand;
 
 	FractalCurve::FractalCurve(QPointF s, QPointF e){
-	seed = FractalCurve::rand();
-	setFlag(QGraphicsItem::ItemIsSelectable);
+		seed = FractalCurve::rand();
+		setFlag(QGraphicsItem::ItemIsSelectable);
 		noise = FastNoise::New<FastNoise::FractalFBm>();
 		noise->SetSource(FastNoise::New<FastNoise::Simplex>());
 		frequency = 0.02;
