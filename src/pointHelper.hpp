@@ -12,7 +12,7 @@ namespace Lipuma{
 		This function extrapolates for values outside of [0,1]
 		Clamp your inputs if clamped behavior is needed.
 	*/
-	QPointF lerp(QPointF a, QPointF b, qreal x){
+	inline QPointF lerp(QPointF a, QPointF b, qreal x){
 		return (a*(1-x) + b* x);
 	}
 
@@ -26,7 +26,7 @@ namespace Lipuma{
 	}
 
 	// Computes the euclidan distance of a vector
-	qreal distance(QPointF p){
+	inline qreal distance(QPointF p){
 		return sqrt(abs(QPointF::dotProduct(p,p)));
 	}
 }
