@@ -20,7 +20,9 @@ The correct solution for this would have been to write my own implementation of 
 
 ## Next Steps
 
-The file writing does not have all of the features it needs to support quite yet, and is still rather non-ergonomic. More work needs to be done.
+The file writing does not have all of the features it needs to support quite yet, and is still rather non-ergonomic.
+
+I should 1) Finish adding the missing properties to the serialization system, this is a simple fix that would take 10 minutes, I just havent gotten to it yet. 2) Put basic metadata at the beginning of the file, such as a magic number for file identification, which should also take less than 10 minutes, and 3) add basic tests to confirm that all properties are correctly written and loaded when creating and saving a file, I think this would take around a day to properly implement
 
 ## Resources
 
