@@ -4,9 +4,11 @@
 #include <cstdlib>
 #include <iostream>
 #include <set>
+#include <type_traits>
 
 #include <QGraphicsView>
 #include <QGraphicsItem>
+#include <QFileDialog>
 #include <QKeyEvent>
 #include <QPointF>
 #include <QPainter>
@@ -15,6 +17,7 @@
 #include "tool/fractalTool.hpp"
 #include "tool/tool.hpp"
 #include "tool/toolManager.hpp"
+#include "file/serializer.hpp"
 
 namespace Lipuma {
 	Canvas::Canvas(QGraphicsScene *parent) : QGraphicsView(parent){
